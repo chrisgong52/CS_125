@@ -6,3 +6,6 @@ class Person:
         self.calendar = user_calendar.Calendar()
         self.recs = {}
         self.stats = {}
+
+    def udpate_calendar(self):
+        pass
