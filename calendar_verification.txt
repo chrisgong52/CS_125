@@ -1,0 +1,29 @@
+add meal Mon fried rice
+meals:  {'Sun': '', 'Mon': 'fried rice', 'Tues': '', 'Wed': '', 'Thurs': '', 'Fri': '', 'Sat': ''}
+add meal Tues chicken
+meals:  {'Sun': '', 'Mon': 'fried rice', 'Tues': 'chicken', 'Wed': '', 'Thurs': '', 'Fri': '', 'Sat': ''}
+add meal Mon chicken
+would you like to override the previous entry? (Y/ N): Y
+meals:  {'Sun': '', 'Mon': 'chicken', 'Tues': 'chicken', 'Wed': '', 'Thurs': '', 'Fri': '', 'Sat': ''}
+add meal aljksfd ljksdf
+meals:  {'Sun': '', 'Mon': 'chicken', 'Tues': 'chicken', 'Wed': '', 'Thurs': '', 'Fri': '', 'Sat': ''}
+
+add sleep Tues 10
+sleep:  {'Sun': -1, 'Mon': -1, 'Tues': 10, 'Wed': -1, 'Thurs': -1, 'Fri': -1, 'Sat': -1}
+add sleep Fri 4
+sleep:  {'Sun': -1, 'Mon': -1, 'Tues': 10, 'Wed': -1, 'Thurs': -1, 'Fri': 4, 'Sat': -1}
+add sleep Fri 10
+would you like to override the previous entry? (Y/ N): N
+sleep:  {'Sun': -1, 'Mon': -1, 'Tues': 10, 'Wed': -1, 'Thurs': -1, 'Fri': 4, 'Sat': -1}
+add sleep Thurs 4
+sleep:  {'Sun': -1, 'Mon': -1, 'Tues': 10, 'Wed': -1, 'Thurs': 4, 'Fri': 4, 'Sat': -1}
+
+add exercise Tues 10
+exercise:  {'Sun': -1, 'Mon': -1, 'Tues': 10, 'Wed': -1, 'Thurs': -1, 'Fri': -1, 'Sat': -1}
+add exercise Fri 4
+exercise:  {'Sun': -1, 'Mon': -1, 'Tues': 10, 'Wed': -1, 'Thurs': -1, 'Fri': 4, 'Sat': -1}
+add exercise Fri 10
+would you like to override the previous entry? (Y/ N): Y
+exercise:  {'Sun': -1, 'Mon': -1, 'Tues': 10, 'Wed': -1, 'Thurs': -1, 'Fri': 10, 'Sat': -1}
+add exercise Thurs 
+exercise:  {'Sun': -1, 'Mon': -1, 'Tues': 10, 'Wed': -1, 'Thurs': 4, 'Fri': 10, 'Sat': -1}

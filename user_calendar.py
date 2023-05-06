@@ -40,6 +40,30 @@ class Calendar:
             "Fri": -1,
             "Sat": -1
         }
+        self.function_table = {
+            "meals": self.add_meal,
+            "sleep": self.add_sleep,
+            "exercise": self.add_exercise,
+        }
+        self.days = set([
+            "Sun",
+            "Mon",
+            "Tues",
+            "Wed",
+            "Thurs",
+            "Fri",
+            "Sat"
+        ])
+
+    '''
+        prompt user to override the previous entry; "Y" for yes, "N" for no
+        return true to override, else false
+    '''
+    def override_entry(self):
+        temp = input("would you like to override the previous entry? (Y/ N): ")
+        # print only for testing
+        print(temp)
+        return temp.strip(" \n") == "Y"
 
     '''
         add_meal adds a meal to the given day specified in the parameter
@@ -49,10 +73,11 @@ class Calendar:
     '''
     def add_meal(self, day: str, meal: str) -> bool:
         if day in self.meals.keys():
-            self.meals[day] = meal
-            return True
-        else:
-            return False
+            if self.meals[day] == "" or self.override_entry():
+                self.meals[day] = meal
+                return True
+            else:
+                return False
         
     '''
         add_sleep adds the amount of sleep a user got to a given day
@@ -62,8 +87,11 @@ class Calendar:
     '''
     def add_sleep(self, day: str, sleep: int) -> bool:
         if day in self.sleep.keys():
-            self.sleep[day] = int
-            return True
+            if self.sleep[day] == -1 or self.override_entry():
+                self.sleep[day] = sleep
+                return True
+            else:
+                return False
         else:
             return False
         
@@ -75,7 +103,23 @@ class Calendar:
     '''
     def add_exercise(self, day: str, exercise: int) -> bool:
         if day in self.exercise.keys():
-            self.exercise[day] = exercise
-            return True
+            if self.exercise[day] == -1 or self.override_entry():
+                self.exercise[day] = exercise
+                return True
+            else:
+                return False
         else:
             return False
+        
+    '''
+        modify the corresponding table with an update
+        table: specify the dictionary that we'll be modifying
+            "meals"
+            "sleep"
+            "exercise"
+        day is the day to modify
+        update is the update to change the table
+    '''
+    def update_attribute(self, table, day: str, update) -> bool:
+        if day in self.days and table in self.function_table.keys():
+            self.function_table[table](day, update)
