@@ -54,6 +54,8 @@ class Calendar:
             "Fri",
             "Sat"
         ])
+        self.__dict__["function_table"] = ""
+        self.__dict__["days"] = ""
 
     '''
         prompt user to override the previous entry; "Y" for yes, "N" for no
