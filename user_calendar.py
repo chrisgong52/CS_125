@@ -54,8 +54,14 @@ class Calendar:
             "Fri",
             "Sat"
         ])
-        self.__dict__["function_table"] = ""
-        self.__dict__["days"] = ""
+        # self.__dict__["function_table"] = ""
+        # self.__dict__["days"] = ""
+
+    def convert_dict(self):
+        temp = self.__dict__
+        temp.pop("function_table")
+        temp.pop("days")
+        return temp
 
     '''
         prompt user to override the previous entry; "Y" for yes, "N" for no
