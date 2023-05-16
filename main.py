@@ -4,11 +4,6 @@ import database
 
 
 db_string = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net/"
-'''
-    k_users is a dictionary mapping the ids of users to the corresponding
-    person object
-'''
-k_users = {}
 
 '''
     parse_input returns the command for a given input
@@ -21,22 +16,42 @@ def parse_input(commands: str):
     return -1
 
 
-
-
 '''
     create creates a new person object and adds that to the
-    dictionary
+    dictionary. commands will be a person's first and last name
 
     return the id of the person created to send to the frontend
 '''
-def create(commands: list):
-    print('create', commands)
+def create(commands: list, existing_ids: dict, db: database):
     id = random.randint(0, 100000)
-    while id in k_users.keys():
+    while id in existing_ids.keys():
         id = random.randint(0, 100000)
-    k_users[id] = user.Person(commands[0])
-    print("created", commands[0])
+    existing_ids[id] = commands[0] + " " + commands[1]
+    new_user = user.Person(commands[0] + " " + commands[1], id)
+    db.insert(new_user)
+    print("created", commands[0] + " " + commands[1])
     return id
+
+'''
+    given a user id, update the user's data
+'''
+def update(commands: list, existing_ids: dict, db: database):
+    user_id = int(commands[0])
+    command = commands[1]
+    if command == "calendar":
+        table = commands[2]
+        day = commands[3]
+        if table == "meals":
+            change = ""
+            for item in commands[4:]:
+                change = change + item + " "
+            change = change[:-1]
+        else:
+            change = int(commands[4])
+        updated = db.update_user_calendar(user_id, table, day, change)
+        return updated
+    else:
+        pass
     
 
 '''
@@ -46,29 +61,31 @@ def create(commands: list):
 k_func_table = {
     "quit": "",
     "create": create,
+    "update": update,
 }
 
-if __name__ == "__main__":
-    '''
-        list of commands:
-            create (person name)
-            sleep (person id)
-    '''
-
+f'''
+    valid commands:
+        quit
+        create *name (first last)*
+        update *user id* 
+'''
+def main():
     db = database.Database()
-    new_user = user.Person("Peining Zhang")
-    db.update_user("Peining Zhang", "meals", "Thurs", "Pho")
-    # db.delete("Andy Gong")
-    # db.insert(new_user)
+    '''
+        k_users is a dictionary mapping the ids of users to the corresponding
+        person object
+    '''
+    k_users = {}
+    for item in db.find_all():
+        k_users[item["_id"]] = item["name"]
+    print(k_users)
+    while True:
+        temp = input("enter a command: ")
+        commands = temp.strip("\n").split()
+        if commands[0] == "quit":
+            return 0
+        k_func_table[commands[0]](commands[1:], k_users, db)
 
-    # res = db.find("Andy Gong")
-    # print(res)
-    # while True:
-    #     command_input = input("enter a command: ")
-    #     command = parse_input(command_input)
-    #     if command != -1:
-    #         if command[0] == "quit":
-    #             break
-    #         k_func_table[command[0]](command[1:])
-    #     else:
-    #         continue
+if __name__ == "__main__":
+    main()

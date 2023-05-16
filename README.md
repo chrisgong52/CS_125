@@ -6,5 +6,6 @@ for them to improve their health. It starts by storing different aspects of a
 person's schedule like sleep (hours), exercise (hours), and food
 
 ## Commands
-"quit" - quit the program
-"create {name}" - create a user with a given name
+### "quit" - quit the program
+### "create {name}" - create a user with a given name
+### "update {}
