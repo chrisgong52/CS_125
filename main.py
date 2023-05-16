@@ -1,6 +1,9 @@
 import user
 import random
+import database
 
+
+db_string = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net/"
 '''
     k_users is a dictionary mapping the ids of users to the corresponding
     person object
@@ -51,12 +54,21 @@ if __name__ == "__main__":
             create (person name)
             sleep (person id)
     '''
-    while True:
-        command_input = input("enter a command: ")
-        command = parse_input(command_input)
-        if command != -1:
-            if command[0] == "quit":
-                break
-            k_func_table[command[0]](command[1:])
-        else:
-            continue
+
+    db = database.Database()
+    new_user = user.Person("Peining Zhang")
+    db.update_user("Peining Zhang", "meals", "Thurs", "Pho")
+    # db.delete("Andy Gong")
+    # db.insert(new_user)
+
+    # res = db.find("Andy Gong")
+    # print(res)
+    # while True:
+    #     command_input = input("enter a command: ")
+    #     command = parse_input(command_input)
+    #     if command != -1:
+    #         if command[0] == "quit":
+    #             break
+    #         k_func_table[command[0]](command[1:])
+    #     else:
+    #         continue
