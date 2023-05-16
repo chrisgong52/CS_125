@@ -21,8 +21,15 @@ class Database:
         return the user that was found
             change to use id instead of name
     '''
-    def find(self, name):
-        return self.records.find_one({"name": name})
+    def find(self, id):
+        return self.records.find_one({"_id": id})
+    
+    '''
+        find all users and return the found users in pymongo cursor object
+        to be iterated through
+    '''
+    def find_all(self):
+        return self.records.find({})
     
     '''
         return the user that was deleted
@@ -40,11 +47,11 @@ class Database:
         return bool if record was updated
             change to use id instead of name
     '''
-    def update_user(self, name, table, day, change):
-        temp = self.find(name)
+    def update_user_calendar(self, id, table, day, change):
+        temp = self.find(id)
         if table in temp["calendar"].keys() and day in temp["calendar"][table].keys():
             temp["calendar"][table][day] = change
-            self.records.update_one({"name": name}, {"$set": temp})
+            self.records.update_one({"_id": id}, {"$set": temp})
             return True
         else:
             return False
