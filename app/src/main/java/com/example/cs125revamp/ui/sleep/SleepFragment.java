@@ -1,4 +1,4 @@
-package com.example.cs125revamp.ui.dashboard;
+package com.example.cs125revamp.ui.sleep;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,23 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.cs125revamp.databinding.FragmentDashboardBinding;
+import com.example.cs125revamp.databinding.FragmentCalendarBinding;
+import com.example.cs125revamp.databinding.FragmentSleepBinding;
 
-public class DashboardFragment extends Fragment {
+public class SleepFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentSleepBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        SleepViewModel sleepViewModel =
+                new ViewModelProvider(this).get(SleepViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentSleepBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textSleep;
+        sleepViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

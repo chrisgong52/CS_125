@@ -1,16 +1,16 @@
-package com.example.cs125revamp.ui.dashboard;
+package com.example.cs125revamp.ui.exercise;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class ExerciseViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public ExerciseViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is Exercise fragment");
     }
 
     public LiveData<String> getText() {
