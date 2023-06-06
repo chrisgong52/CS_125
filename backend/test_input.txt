@@ -1,2 +1,2 @@
-update 16286 goals weight 160
+update 26168 calendar meals Fri pho
 quit
