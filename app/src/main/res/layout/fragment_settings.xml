@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_700"
-    tools:context=".ui.settings.EnterExerciseFragment">
+    tools:context=".ui.settings.SettingsFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
@@ -24,7 +24,11 @@
             tools:layout_editor_absoluteX="114dp"
             tools:layout_editor_absoluteY="144dp" />
 
-
+        <Button
+            android:id="@+id/updateGoalsBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update my Goals" />
 
     </LinearLayout>
 
