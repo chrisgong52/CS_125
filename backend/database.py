@@ -4,7 +4,7 @@ import user
 
 
 class Database:
-    def __init__(self, server = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net/", database = "User_DB"):
+    def __init__(self, server = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net/?tls=true&tlsAllowInvalidCertificates=true", database = "User_DB"):
         self.server = pymongo.MongoClient(server)
         self.db = self.server.get_database(database)
         self.records = self.db.User_Records
@@ -29,6 +29,8 @@ class Database:
         to be iterated through
     '''
     def find_all(self):
+        for item in self.records.find({}):
+            print(item)
         return self.records.find({})
     
     '''

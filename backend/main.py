@@ -1,7 +1,7 @@
 import user
 import random
 import database
-
+import pymongo
 
 db_string = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net/"
 
@@ -95,6 +95,7 @@ k_func_table = {
             goals *attribute *(weight, fat_percent)* *change*
 '''
 def main():
+    print(pymongo.version)
     db = database.Database()
     '''
         k_users is a dictionary mapping the ids of users to the corresponding
@@ -102,14 +103,15 @@ def main():
     '''
     k_users = {}
     for item in db.find_all():
+        print(item)
         k_users[item["_id"]] = item["name"]
-    print(k_users)
-    while True:
-        temp = input("enter a command: ")
-        commands = temp.strip("\n").split()
-        if commands[0] == "quit":
-            return 0
-        k_func_table[commands[0]](commands[1:], k_users, db)
+    # print(k_users)
+    # while True:
+    #     temp = input("enter a command: ")
+    #     commands = temp.strip("\n").split()
+    #     if commands[0] == "quit":
+    #         return 0
+    #     k_func_table[commands[0]](commands[1:], k_users, db)
 
 if __name__ == "__main__":
     main()
