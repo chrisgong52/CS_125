@@ -76,5 +76,47 @@ class Database:
         else:
             return False
         
+    '''
+        change previous sleep in the database to the sleep dict and reset sleep dict
+    '''
+    def update_user_sleep(self, id, attribute, change):
+        temp = self.find(id)
+        if temp != None:
+            temp["calendar"]["prev_sleep"] = temp["calendar"]["sleep"]
+            temp["calendar"]["sleep"] = {
+            "Sun": -1,
+            "Mon": -1,
+            "Tues": -1,
+            "Wed": -1,
+            "Thurs": -1,
+            "Fri": -1,
+            "Sat": -1
+            }
+            self.records.update_one({"_id": id}, {"$set": temp})
+            return True
+        else:
+            return False
+        
+    '''
+        change previous exercise in the database to the exercise dict and reset exercise dict
+    '''
+    def update_user_exercise(self, id, attribute, change):
+        temp = self.find(id)
+        if temp != None:
+            temp["calendar"]["prev_exercise"] = temp["calendar"]["exercise"]
+            temp["calendar"]["exercise"] = {
+            "Sun": -1,
+            "Mon": -1,
+            "Tues": -1,
+            "Wed": -1,
+            "Thurs": -1,
+            "Fri": -1,
+            "Sat": -1
+            }
+            self.records.update_one({"_id": id}, {"$set": temp})
+            return True
+        else:
+            return False
+        
     def delete_all(self):
         return self.records.delete_many({})
