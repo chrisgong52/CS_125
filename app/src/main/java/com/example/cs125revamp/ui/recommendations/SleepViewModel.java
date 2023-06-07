@@ -1,4 +1,4 @@
-package com.example.cs125revamp.ui.sleep;
+package com.example.cs125revamp.ui.recommendations;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
