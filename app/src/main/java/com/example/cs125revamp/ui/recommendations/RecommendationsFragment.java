@@ -1,4 +1,4 @@
-package com.example.cs125revamp.ui.sleep;
+package com.example.cs125revamp.ui.recommendations;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -12,18 +12,18 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.cs125revamp.R;
-import com.example.cs125revamp.databinding.FragmentSleepBinding;
+import com.example.cs125revamp.databinding.FragmentRecommendationsBinding;
 
-public class SleepFragment extends Fragment {
+public class RecommendationsFragment extends Fragment {
 
-    private FragmentSleepBinding binding;
+    private FragmentRecommendationsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         SleepViewModel sleepViewModel =
                 new ViewModelProvider(this).get(SleepViewModel.class);
 
-        binding = FragmentSleepBinding.inflate(inflater, container, false);
+        binding = FragmentRecommendationsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
 
@@ -33,7 +33,7 @@ public class SleepFragment extends Fragment {
             public void onClick(View view) {
                 getParentFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.nav_host_fragment_activity_main, new EnterSleepFragment())
+                        .replace(R.id.nav_host_fragment_activity_main, new EnterActivityFragment())
                         .setReorderingAllowed(true)
                         .addToBackStack(null)
                         .commit();
@@ -41,7 +41,7 @@ public class SleepFragment extends Fragment {
         });
 
         final TextView textView = binding.textSleep;
-        sleepViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        //sleepViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
