@@ -27,6 +27,18 @@ class Calendar:
             "Sat": -1
         }
         '''
+            keeps track of previous week's sleep
+        '''
+        self.prev_sleep = {
+            "Sun": -1,
+            "Mon": -1,
+            "Tues": -1,
+            "Wed": -1,
+            "Thurs": -1,
+            "Fri": -1,
+            "Sat": -1
+        }
+        '''
             exercise keeps track of how many hours of exercise a user
             has gotten over a week; it can be modified to track cardio
             vs weights, etc
@@ -40,10 +52,24 @@ class Calendar:
             "Fri": -1,
             "Sat": -1
         }
+        '''
+            keeps track of previous week's exercise
+        '''
+        self.prev_exercise = {
+            "Sun": -1,
+            "Mon": -1,
+            "Tues": -1,
+            "Wed": -1,
+            "Thurs": -1,
+            "Fri": -1,
+            "Sat": -1
+        }
         self.function_table = {
             "meals": self.add_meal,
             "sleep": self.add_sleep,
             "exercise": self.add_exercise,
+            "new_sleep": self.new_sleep,
+            "new_exercise": self.new_exercise,
         }
         self.days = set([
             "Sun",
@@ -131,3 +157,33 @@ class Calendar:
     def update_attribute(self, table, day: str, update) -> bool:
         if day in self.days and table in self.function_table.keys():
             self.function_table[table](day, update)
+
+    '''
+        change the current sleep to prev_sleep and create a new sleep dict
+    '''
+    def new_sleep(self):
+        self.prev_sleep = self.sleep
+        self.sleep = {
+            "Sun": -1,
+            "Mon": -1,
+            "Tues": -1,
+            "Wed": -1,
+            "Thurs": -1,
+            "Fri": -1,
+            "Sat": -1
+        }
+    
+    '''
+        change the current exercise to prev_exercise and create a new exercise dict
+    '''
+    def new_exercise(self):
+        self.prev_exercise= self.exercise
+        self.exercise = {
+            "Sun": -1,
+            "Mon": -1,
+            "Tues": -1,
+            "Wed": -1,
+            "Thurs": -1,
+            "Fri": -1,
+            "Sat": -1
+        }

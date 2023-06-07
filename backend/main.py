@@ -61,6 +61,12 @@ def update(commands: list, existing_ids: dict, db: database):
             updated = db.update_user_goals(user_id, attribute, change)
             print("updated goals")
         return updated
+    elif command == "new_sleep":
+        updated = db.update_user_sleep(user_id, "", "")
+        print("updated sleep week")
+    elif command == "new_exercise":
+        updated = db.update_user_exercise(user_id, "", "")
+        print("updated calendar week")
     else:
         pass
     return False
@@ -93,6 +99,8 @@ k_func_table = {
             calendar *table*, *day*, *change*
             stats *attribute (height, weight, fat_percent)* *change*
             goals *attribute *(weight, fat_percent)* *change*
+            new_sleep // doesn't take extra parameters, just cycles week
+            new_exercise // doesn't take extra parameters, just cycles week
 '''
 def main():
     print(pymongo.version)
@@ -102,16 +110,13 @@ def main():
         person object
     '''
     k_users = {}
-    for item in db.find_all():
-        print(item)
-        k_users[item["_id"]] = item["name"]
-    # print(k_users)
-    # while True:
-    #     temp = input("enter a command: ")
-    #     commands = temp.strip("\n").split()
-    #     if commands[0] == "quit":
-    #         return 0
-    #     k_func_table[commands[0]](commands[1:], k_users, db)
+    print(k_users)
+    while True:
+        temp = input("enter a command: ")
+        commands = temp.strip("\n").split()
+        if commands[0] == "quit":
+            return 0
+        k_func_table[commands[0]](commands[1:], k_users, db)
 
 if __name__ == "__main__":
     main()
