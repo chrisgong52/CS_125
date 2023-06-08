@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/purple_700"
-    tools:context=".UpdateGoalsFragment">
+    tools:context=".ui.settings.UpdateGoalsFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
@@ -59,6 +59,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Update Info" />
+
+        <TextView
+            android:id="@+id/confirmationMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"  />
 
     </LinearLayout>
 

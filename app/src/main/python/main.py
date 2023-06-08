@@ -3,7 +3,13 @@ import random
 import database
 import pymongo
 
-db_string = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net/"
+#THESE 3 LINES NEEDED FOR ANDROID APP TO CONNECT
+import dns.resolver
+dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
+dns.resolver.default_resolver.nameservers=['8.8.8.8']
+
+#db_string = "mongodb://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net:27017/"
+db_string = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net"
 
 '''
     parse_input returns the command for a given input
@@ -116,7 +122,19 @@ def main():
         commands = temp.strip("\n").split()
         if commands[0] == "quit":
             return 0
-        k_func_table[commands[0]](commands[1:], k_users, db)
+        print(k_func_table[commands[0]](commands[1:], k_users, db))
+
+def accept_one_command(command):
+    print(pymongo.version)
+    db = database.Database()
+
+    commands = command.strip("\n").split()
+    k_users = {}
+    print(k_users)
+
+    return k_func_table[commands[0]](commands[1:], k_users, db)
+
 
 if __name__ == "__main__":
     main()
+

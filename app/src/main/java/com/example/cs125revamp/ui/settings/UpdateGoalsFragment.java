@@ -1,4 +1,4 @@
-package com.example.cs125revamp;
+package com.example.cs125revamp.ui.settings;
 
 import android.os.Bundle;
 
@@ -8,10 +8,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
+import com.example.cs125revamp.R;
 import com.example.cs125revamp.databinding.FragmentUpdateGoalsBinding;
-import com.example.cs125revamp.ui.settings.SettingsFragment;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,8 +70,9 @@ public class UpdateGoalsFragment extends Fragment {
         binding = FragmentUpdateGoalsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        Button btnUpdateGoals = root.findViewById(R.id.backButtonEnterGoals);
-        btnUpdateGoals.setOnClickListener(new View.OnClickListener() {
+        //BACK BUTTON
+        Button btnUpdateGoalsBack = root.findViewById(R.id.backButtonEnterGoals);
+        btnUpdateGoalsBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getParentFragmentManager()
@@ -80,7 +84,22 @@ public class UpdateGoalsFragment extends Fragment {
             }
         });
 
-        // Inflate the layout for this fragment
+        //SUBMIT BUTTON
+        Button btnUpdateGoalsSubmit = root.findViewById(R.id.submitInfoChangeBtn);
+        TextView confirmationMessage= (TextView)root.findViewById(R.id.confirmationMessage);
+        btnUpdateGoalsSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!Python.isStarted())
+                    Python.start(new AndroidPlatform(getContext()));
+
+                Python py = Python.getInstance();
+                PyObject pyf = py.getModule("helloworld");
+                PyObject result = pyf.callAttr("m", "Jadon");
+                confirmationMessage.setText(result.toString());
+            }
+        });
+
         return root;
     }
 }
