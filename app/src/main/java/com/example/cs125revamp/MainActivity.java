@@ -30,10 +30,13 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-
         SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
-        if (!sharedPreferences.contains("FirstTimeInstallDone") || !sharedPreferences.contains("FirstTimeInstallDone")){
+                getSharedPreferences("PREFERENCE", MODE_PRIVATE);
+        System.out.println("Current user is " +
+                sharedPreferences.getString("name", "DEFAULT_NAME"));
+
+        System.out.println(sharedPreferences.contains("FirstTimeInstallDone"));
+        if (!sharedPreferences.contains("FirstTimeInstallDone")){
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
             startActivity(intent);
         }

@@ -2,13 +2,13 @@ import user
 import random
 import database
 import pymongo
+import socket
 
 #THESE 3 LINES NEEDED FOR ANDROID APP TO CONNECT
 import dns.resolver
 dns.resolver.default_resolver=dns.resolver.Resolver(configure=False)
 dns.resolver.default_resolver.nameservers=['8.8.8.8']
 
-#db_string = "mongodb://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net:27017/"
 db_string = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net"
 
 '''

@@ -1,5 +1,7 @@
 package com.example.cs125revamp.ui.settings;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.chaquo.python.PyObject;
@@ -69,6 +72,7 @@ public class UpdateGoalsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentUpdateGoalsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE);
 
         //BACK BUTTON
         Button btnUpdateGoalsBack = root.findViewById(R.id.backButtonEnterGoals);
@@ -84,6 +88,9 @@ public class UpdateGoalsFragment extends Fragment {
             }
         });
 
+        EditText curr_weight_box=(EditText)root.findViewById(R.id.currentWeightForm);
+        EditText targ_weight_box=(EditText)root.findViewById(R.id.targetWeightForm);
+
         //SUBMIT BUTTON
         Button btnUpdateGoalsSubmit = root.findViewById(R.id.submitInfoChangeBtn);
         TextView confirmationMessage= (TextView)root.findViewById(R.id.confirmationMessage);
@@ -92,14 +99,27 @@ public class UpdateGoalsFragment extends Fragment {
             public void onClick(View view) {
                 if(!Python.isStarted())
                     Python.start(new AndroidPlatform(getContext()));
+                int curr_weight_input = Integer.valueOf(curr_weight_box.getText().toString());
+                int targ_weight_input = Integer.valueOf(targ_weight_box.getText().toString());
+                String command1 = "update " + preferences.getInt("user_id", -1)
+                        + " stats weight " + curr_weight_input;
+                String command2 = "update " + preferences.getInt("user_id", -1)
+                        + " goals weight " + targ_weight_input;
+                System.out.println(command1);
+                System.out.println(command2);
 
                 Python py = Python.getInstance();
-                PyObject pyf = py.getModule("helloworld");
-                PyObject result = pyf.callAttr("m", "Jadon");
-                confirmationMessage.setText(result.toString());
+                PyObject pyf = py.getModule("main");
+                pyf.callAttr("accept_one_command", command1);
+                pyf.callAttr("accept_one_command", command2);
+                confirmationMessage.setText("Successfully updated weights");
             }
         });
 
         return root;
+    }
+
+    private void updateWeightsShown() {
+
     }
 }

@@ -24,6 +24,15 @@
             tools:layout_editor_absoluteX="114dp"
             tools:layout_editor_absoluteY="144dp" />
 
+        <TextView
+            android:id="@+id/helloName"
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="144dp" />
+
         <Button
             android:id="@+id/updateGoalsBtn"
             android:layout_width="match_parent"
