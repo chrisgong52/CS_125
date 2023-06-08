@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/purple_700"
+    android:background="@color/cerulean"
     tools:context=".ui.recommendations.RecommendationsFragment">
 
     <LinearLayout
@@ -29,15 +29,16 @@
 
         <Button
             android:id="@+id/buttonEnterSleep"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Track Sleep and Exercise \nfor Today"
+            android:background="#3485A5"
             tools:layout_editor_absoluteX="126dp"
             tools:layout_editor_absoluteY="49dp" />
 
         <TextView
             android:id="@+id/textView"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:text="Recommendations:"
