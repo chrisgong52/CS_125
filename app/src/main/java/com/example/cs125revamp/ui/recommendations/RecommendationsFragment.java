@@ -43,7 +43,7 @@ public class RecommendationsFragment extends Fragment {
         Map<PyObject, PyObject> result = pyf.callAttr("get_all_recommendations", user_id).asMap();
 
         exerciseText.setText(result.get("exercise").toString());
-        sleepText.setText(result.get("sleep").toString());
+        sleepText.setText(result.get("sleep").toString() + "\n\n\n");
         exerciseText.setMovementMethod(new ScrollingMovementMethod());
         sleepText.setMovementMethod(new ScrollingMovementMethod());
 

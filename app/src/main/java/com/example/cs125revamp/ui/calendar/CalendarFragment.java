@@ -53,16 +53,18 @@ public class CalendarFragment extends Fragment {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month,
                                             int dayOfMonth) {
+                month += 1;
                 int sleep = 0;
                 int exercise = 0;
                 //prev
                 System.out.println(Calendar.getInstance().get(Calendar.DAY_OF_MONTH));
                 System.out.println(dayOfMonth);
-                if (Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < dayOfMonth) {
+                int todayDayOfMonth = Calendar.getInstance().get(Calendar.DAY_OF_MONTH);
+                if (todayDayOfMonth < dayOfMonth) {
                     selectedDateActivity.setText("On " + month + "/" + dayOfMonth + "," + year +
                             ", you didn't track any sleep or exercise.");
                 }
-                else if (Math.abs(Calendar.DAY_OF_MONTH - dayOfMonth) >= 7) {
+                else if (Math.abs(todayDayOfMonth - dayOfMonth) >= 7) {
                     try {
                         sleep = result.get("calendar").asMap().get("prev_sleep").asMap()
                                 .get(getDayOfWeek(year, month, dayOfMonth)).toInt();
@@ -113,9 +115,6 @@ public class CalendarFragment extends Fragment {
                 }
             }
         });
-
-
-
         return root;
     }
 
