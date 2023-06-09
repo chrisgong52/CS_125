@@ -1,5 +1,7 @@
 package com.example.cs125revamp.ui.recommendations;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,9 +10,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 
+import com.chaquo.python.PyObject;
+import com.chaquo.python.Python;
+import com.chaquo.python.android.AndroidPlatform;
 import com.example.cs125revamp.R;
 import com.example.cs125revamp.databinding.FragmentEnterActivityBinding;
+
+import java.util.Calendar;
+import java.util.HashMap;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,9 +78,45 @@ public class EnterActivityFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentEnterActivityBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+        SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE);
+        int user_id = preferences.getInt("user_id", -1);
 
-        Button btnBackSleep = root.findViewById(R.id.backButtonEnterInfo);
-        btnBackSleep.setOnClickListener(new View.OnClickListener() {
+        EditText sleepInputForm = root.findViewById(R.id.sleepInput);
+        EditText exerciseInputForm = root.findViewById(R.id.exerciseInput);
+
+        //SUBMIT BUTTON
+        Button btnTrackActivitySubmit = root.findViewById(R.id.recordButton);
+        TextView confirmationMessage= root.findViewById(R.id.confirmationMessage);
+        btnTrackActivitySubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(!Python.isStarted())
+                    Python.start(new AndroidPlatform(getContext()));
+                String today = getDayOfWeek();
+
+                int sleep_input = Integer.valueOf(sleepInputForm.getText().toString());
+                int exercise_input = Integer.valueOf(exerciseInputForm.getText().toString());
+                String command1 = "update " +user_id
+                        + " calendar sleep " + today + " " + sleep_input;
+                String command2 = "update " + user_id
+                        + " calendar exercise " + today + " " + exercise_input;
+                System.out.println(command1);
+                System.out.println(command2);
+
+                Python py = Python.getInstance();
+                PyObject pyf = py.getModule("main");
+                pyf.callAttr("accept_one_command", command1);
+                pyf.callAttr("accept_one_command", command2);
+                confirmationMessage.setText("Successfully tracked your sleep and exercise!");
+            }
+        });
+
+
+
+
+        //BACK BUTTON
+        Button btnBackTrackActivity = root.findViewById(R.id.backButtonEnterInfo);
+        btnBackTrackActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 getParentFragmentManager()
@@ -81,5 +128,34 @@ public class EnterActivityFragment extends Fragment {
             }
         });
         return root;
+    }
+
+    private String getDayOfWeek() {
+        int today = Calendar.getInstance().get(Calendar.DAY_OF_WEEK);
+        String result = "";
+        switch (today) {
+            case Calendar.SUNDAY:
+                result = "Sun";
+                break;
+            case Calendar.MONDAY:
+                result = "Mon";
+                break;
+            case Calendar.TUESDAY:
+                result = "Tues";
+                break;
+            case Calendar.WEDNESDAY:
+                result = "Wed";
+                break;
+            case Calendar.THURSDAY:
+                result = "Thurs";
+                break;
+            case Calendar.FRIDAY:
+                result = "Fri";
+                break;
+            case Calendar.SATURDAY:
+                result = "Sat";
+                break;
+        }
+        return result;
     }
 }

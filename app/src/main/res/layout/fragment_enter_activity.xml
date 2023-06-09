@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="Hours of Sleep: "
+            android:text="Minutes of Sleep: "
             android:textColor="@color/white"
             tools:layout_editor_absoluteX="114dp"
             tools:layout_editor_absoluteY="144dp" />
@@ -40,7 +40,7 @@
             android:layout_width="match_parent"
             android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="Hours of Exercise: "
+            android:text="Minutes of Exercise: "
             android:textColor="@color/white"
             tools:layout_editor_absoluteX="114dp"
             tools:layout_editor_absoluteY="144dp" />
@@ -57,6 +57,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Record Amounts" />
+
+        <TextView
+            android:id="@+id/confirmationMessage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textColor="@color/white"  />
 
     </LinearLayout>
 
