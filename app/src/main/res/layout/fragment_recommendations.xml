@@ -37,11 +37,42 @@
             tools:layout_editor_absoluteY="49dp" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            android:text="Recommendations:"
+            android:textSize="24sp"
+            android:text="Recommendations for Exercise:"
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <TextView
+            android:id="@+id/exerciseRecommendations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:textColor="@color/white"
+            android:text=""
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="Recommendations for Sleep:"
+            android:textSize="24sp"
+            tools:layout_editor_absoluteX="114dp"
+            tools:layout_editor_absoluteY="144dp" />
+
+        <TextView
+            android:id="@+id/sleepRecommendations"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="vertical"
+            android:textColor="@color/white"
+            android:text=""
             tools:layout_editor_absoluteX="114dp"
             tools:layout_editor_absoluteY="144dp" />
 

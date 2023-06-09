@@ -76,6 +76,7 @@ public class UpdateGoalsFragment extends Fragment {
         binding = FragmentUpdateGoalsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE);
+
         int user_id = preferences.getInt("user_id", -1);
         updateWeightsShown(root, user_id);
 
@@ -104,19 +105,37 @@ public class UpdateGoalsFragment extends Fragment {
             public void onClick(View view) {
                 if(!Python.isStarted())
                     Python.start(new AndroidPlatform(getContext()));
-                int curr_weight_input = Integer.valueOf(curr_weight_box.getText().toString());
-                int targ_weight_input = Integer.valueOf(targ_weight_box.getText().toString());
-                String command1 = "update " +user_id
-                        + " stats weight " + curr_weight_input;
-                String command2 = "update " + user_id
-                        + " goals weight " + targ_weight_input;
-                System.out.println(command1);
-                System.out.println(command2);
+                String curr_weight_input = curr_weight_box.getText().toString();
+                String targ_weight_input = targ_weight_box.getText().toString();
+                if (curr_weight_input.length() ==0) {
+                    curr_weight_input = "-1";
+                }
+                if (targ_weight_input.length() ==0) {
+                    targ_weight_input = "-1";
+                }
+                int new_curr_weight = Integer.valueOf(curr_weight_input);
+                int new_targ_weight = Integer.valueOf(targ_weight_input);
+                String command1 = "";
+                String command2 = "";
+
+                if (new_curr_weight != -1) {
+                    command1 = "update " +user_id
+                            + " stats weight " + new_curr_weight;
+                }
+                if (new_targ_weight != -1) {
+                    command2 = "update " + user_id
+                            + " goals weight " + new_targ_weight;
+                }
 
                 Python py = Python.getInstance();
                 PyObject pyf = py.getModule("main");
-                pyf.callAttr("accept_one_command", command1);
-                pyf.callAttr("accept_one_command", command2);
+
+                if (command1.length() != 0) {
+                    pyf.callAttr("accept_one_command", command1);
+                }
+                if (command2.length() != 0) {
+                    pyf.callAttr("accept_one_command", command2);
+                }
                 confirmationMessage.setText("Successfully updated weights");
 
                 updateWeightsShown(root, user_id);
