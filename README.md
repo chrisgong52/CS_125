@@ -16,7 +16,11 @@ The Settings page has an option to change your target weight or current weight.
 
 ## EXPERIMENTING WITH DATABASE
 To do this, run app/src/main/python/main.py
+
 "quit" - quit the program
+
 "find {user_id}" - find user and all info associated with user_id
+
 "create {name}" - create a user with a given name
+
 "update {user_id {}" - updates info for given user_id
