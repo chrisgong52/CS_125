@@ -14,8 +14,13 @@ android {
             abiFilters "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
         }
         python {
-            version "3.9"
+            version "3.11"
+            pip {
+                install "pymongo"
+                install "pymongo[srv]"
+            }
         }
+
         targetSdk 33
         versionCode 1
         versionName "1.0"
@@ -39,7 +44,7 @@ android {
 }
 
 dependencies {
-
+    implementation 'androidx.preference:preference:1.2.0'
     implementation 'androidx.appcompat:appcompat:1.4.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.3'

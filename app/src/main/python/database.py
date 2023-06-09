@@ -1,7 +1,6 @@
 import pymongo
 import user
-
-
+import warnings
 
 class Database:
     def __init__(self, server = "mongodb+srv://19christopherg:ChrisMongo52!@cs125.fufk0kh.mongodb.net/?tls=true&tlsAllowInvalidCertificates=true", database = "User_DB"):

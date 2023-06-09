@@ -37,7 +37,7 @@ public class RecommendationsFragment extends Fragment {
             }
         });
 
-        final TextView textView = binding.textSleep;
+        final TextView textView = binding.textRecommendations;
         //sleepViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
