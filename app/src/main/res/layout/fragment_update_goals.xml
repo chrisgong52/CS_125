@@ -29,6 +29,7 @@
             android:textColor="@color/white"  />
 
         <TextView
+            android:id="@+id/targetWeightText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Target Weight: "
@@ -42,6 +43,7 @@
             android:inputType="number"/>
 
         <TextView
+            android:id="@+id/currWeightText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Current Weight: "

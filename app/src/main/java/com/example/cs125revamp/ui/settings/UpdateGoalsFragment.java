@@ -19,6 +19,9 @@ import com.chaquo.python.android.AndroidPlatform;
 import com.example.cs125revamp.R;
 import com.example.cs125revamp.databinding.FragmentUpdateGoalsBinding;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link UpdateGoalsFragment#newInstance} factory method to
@@ -73,6 +76,8 @@ public class UpdateGoalsFragment extends Fragment {
         binding = FragmentUpdateGoalsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         SharedPreferences preferences = getActivity().getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE);
+        int user_id = preferences.getInt("user_id", -1);
+        updateWeightsShown(root, user_id);
 
         //BACK BUTTON
         Button btnUpdateGoalsBack = root.findViewById(R.id.backButtonEnterGoals);
@@ -101,9 +106,9 @@ public class UpdateGoalsFragment extends Fragment {
                     Python.start(new AndroidPlatform(getContext()));
                 int curr_weight_input = Integer.valueOf(curr_weight_box.getText().toString());
                 int targ_weight_input = Integer.valueOf(targ_weight_box.getText().toString());
-                String command1 = "update " + preferences.getInt("user_id", -1)
+                String command1 = "update " +user_id
                         + " stats weight " + curr_weight_input;
-                String command2 = "update " + preferences.getInt("user_id", -1)
+                String command2 = "update " + user_id
                         + " goals weight " + targ_weight_input;
                 System.out.println(command1);
                 System.out.println(command2);
@@ -113,13 +118,28 @@ public class UpdateGoalsFragment extends Fragment {
                 pyf.callAttr("accept_one_command", command1);
                 pyf.callAttr("accept_one_command", command2);
                 confirmationMessage.setText("Successfully updated weights");
+
+                updateWeightsShown(root, user_id);
             }
         });
-
         return root;
     }
 
-    private void updateWeightsShown() {
+    private void updateWeightsShown(View root, int user_id) {
+        TextView currWeightText= (TextView)root.findViewById(R.id.currWeightText);
+        TextView targWeightText= (TextView)root.findViewById(R.id.targetWeightText);
+        String command1 = "find " + user_id;
+        if(!Python.isStarted())
+            Python.start(new AndroidPlatform(getContext()));
 
+        Python py = Python.getInstance();
+        PyObject pyf = py.getModule("main");
+        Map<PyObject, PyObject> result = pyf.callAttr("accept_one_command", command1).asMap();
+
+        int targWeight = result.get("goals").asMap().get("weight").toInt();
+        int currWeight = result.get("stats").asMap().get("weight").toInt();
+
+        currWeightText.setText("Current Weight: " + currWeight);
+        targWeightText.setText("Target Weight: " + targWeight);
     }
 }

@@ -22,6 +22,10 @@ def parse_input(commands: str):
     return -1
 
 
+def find(commands: list, existing_ids: dict, db: database):
+    return db.find(int(commands[0]))
+
+
 '''
     create creates a new person object and adds that to the
     dictionary. commands will be a person's first and last name
@@ -92,6 +96,7 @@ def delete_all(commands: list, existing_ids: dict, db: database):
 '''
 k_func_table = {
     "quit": "",
+    "find": find,
     "create": create,
     "update": update,
     "delete_all": delete_all,
@@ -101,6 +106,7 @@ k_func_table = {
     valid commands:
         quit
         create *name (first last)*
+        find *id*
         update *user id*
             calendar *table*, *day*, *change*
             stats *attribute (height, weight, fat_percent)* *change*
